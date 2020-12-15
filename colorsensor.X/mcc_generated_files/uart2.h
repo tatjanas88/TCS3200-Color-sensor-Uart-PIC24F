@@ -1,0 +1,222 @@
+/**
+  UART2 Generated Driver API Header File
+
+  @Company
+    Microchip Technology Inc.
+
+  @File Name
+    uart2.h
+
+  @Summary
+    This is the generated header file for the UART2 driver using PIC24 / dsPIC33 / PIC32MM MCUs
+
+  @Description
+    This header file provides APIs for driver for UART2.
+    Generation Information :
+        Product Revision  :  PIC24 / dsPIC33 / PIC32MM MCUs - 1.169.0
+        Device            :  PIC24FJ256GA106
+    The generated drivers are tested against the following:
+        Compiler          :  XC16 v1.50
+        MPLAB             :  MPLAB X v5.40
+*/
+
+/*
+    (c) 2020 Microchip Technology Inc. and its subsidiaries. You may use this
+    software and any derivatives exclusively with Microchip products.
+
+    THIS SOFTWARE IS SUPPLIED BY MICROCHIP "AS IS". NO WARRANTIES, WHETHER
+    EXPRESS, IMPLIED OR STATUTORY, APPLY TO THIS SOFTWARE, INCLUDING ANY IMPLIED
+    WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY, AND FITNESS FOR A
+    PARTICULAR PURPOSE, OR ITS INTERACTION WITH MICROCHIP PRODUCTS, COMBINATION
+    WITH ANY OTHER PRODUCTS, OR USE IN ANY APPLICATION.
+
+    IN NO EVENT WILL MICROCHIP BE LIABLE FOR ANY INDIRECT, SPECIAL, PUNITIVE,
+    INCIDENTAL OR CONSEQUENTIAL LOSS, DAMAGE, COST OR EXPENSE OF ANY KIND
+    WHATSOEVER RELATED TO THE SOFTWARE, HOWEVER CAUSED, EVEN IF MICROCHIP HAS
+    BEEN ADVISED OF THE POSSIBILITY OR THE DAMAGES ARE FORESEEABLE. TO THE
+    FULLEST EXTENT ALLOWED BY LAW, MICROCHIP'S TOTAL LIABILITY ON ALL CLAIMS IN
+    ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
+    THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
+
+    MICROCHIP PROVIDES THIS SOFTWARE CONDITIONALLY UPON YOUR ACCEPTANCE OF THESE
+    TERMS.
+*/
+
+#ifndef _UART2_H
+#define _UART2_H
+
+#define BaudRateU1 9600
+#include <stdbool.h>
+#include <stdint.h>
+#include "string.h"
+#include "clock.h"
+
+/**
+  Section: Included Files
+*/
+
+
+#ifdef __cplusplus  // Provide C++ Compatibility
+
+    extern "C" {
+
+#endif
+
+/**
+  Section: UART2 APIs
+*/
+
+/**
+  @Summary
+    Initialization routine that takes inputs from the UART2 GUI.
+
+  @Description
+    This routine initializes the UART2 driver.
+    This routine must be called before any other UART2 routine is called.
+
+  @Preconditions
+    None
+
+  @Param
+    None
+
+  @Returns
+    None
+
+  @Example
+    None.
+    
+*/
+
+void UART2_Initialize(void);
+
+/**
+  @Summary
+    Read a byte of data from the UART2.
+
+  @Description
+    This routine reads a byte of data from the UART2.
+
+  @Preconditions
+    UART2_Initialize() function should have been called
+    before calling this function. This is a blocking function.
+    So the receive status should be checked to see
+    if the receiver is not empty before calling this function.
+
+  @Param
+    None
+
+  @Returns
+    A data byte received by the driver.
+*/
+void Send_One_Char(unsigned char data);
+void Send_String_UART2(char *str);
+
+
+
+
+/*******************************************************************************
+
+  !!! Deprecated API and types !!!
+  !!! These functions will not be supported in future releases !!!
+
+*******************************************************************************/
+
+/** UART2 Driver Hardware Flags
+
+  @Summary
+    Specifies the status of the hardware receive or transmit
+
+  @Description
+    This type specifies the status of the hardware receive or transmit.
+    More than one of these values may be OR'd together to create a complete
+    status value.  To test a value of this type, the bit of interest must be
+    AND'ed with value and checked to see if the result is non-zero.
+*/
+
+
+/**
+  @Summary
+    Allows setting of a the enable bit for the UART2 mode
+
+  @Description
+    This routine is used to enable the UART2
+  
+  @Preconditions
+    UART2_Initialize() function should have been 
+    called before calling this function.
+ 
+  @Returns
+    None
+
+  @Param
+    None
+  
+  @Example
+    Refer to UART2_Initialize(); for an example
+*/
+
+
+/**
+  @Summary
+    Allows setting of a the disable bit for the UART2 mode
+
+  @Description
+    This routine is used to disable the UART2
+  
+  @Preconditions
+    UART2_Initialize() function should have been 
+    called before calling this function.
+ 
+  @Returns
+    None
+
+  @Param
+    None
+  
+  @Example
+    Refer to UART2_Initialize(); for an example
+*/
+
+
+
+/**
+  @Summary
+    Returns the transmitter and receiver status
+
+  @Description
+    This returns the transmitter and receiver status. The returned status may 
+    contain a value with more than one of the bits
+    specified in the UART2_STATUS enumeration set.  
+    The caller should perform an "AND" with the bit of interest and verify if the
+    result is non-zero (as shown in the example) to verify the desired status
+    bit.
+
+  @Preconditions
+    UART2_Initialize function should have been called 
+    before calling this function
+
+  @Param
+    None.
+
+  @Returns
+    A UART2_STATUS value describing the current status 
+    of the transfer.
+
+  @Example
+    <code>
+        while(!(UART2_StatusGet & UART2_TX_COMPLETE ))
+        {
+           // Wait for the tranmission to complete
+        }
+    </code>
+*/
+
+
+#ifdef __cplusplus  // Provide C++ Compatibility
+
+    }
+
+#endif
+
+#endif  // _UART2_H
